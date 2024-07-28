@@ -1,6 +1,7 @@
 import { FastifyInstance } from 'fastify';
 import 'dotenv/config';
 import { prisma } from '../db/db';
+import { sendTelegramNotification } from '../notifications/telegram-notifyer';
 
 interface IQueryString {
 	key: string;
@@ -25,7 +26,12 @@ export async function sensorRoutes(fastify: FastifyInstance) {
 			// Register the sensor reading
 			await prisma.sensorReading.create({ data: { source } });
 
-			//TODO: Send notifications
+			// Send notifications
+			sendTelegramNotification({
+				token: process.env.TELEGRAM_BOT_TOKEN ?? '',
+				chatId: process.env.TELEGRAM_CHAT_ID ?? '',
+				message: process.env.TELEGRAM_NOTIFICATION_MESSAGE ?? '*Sensor reading* %0ATime time to empty the can',
+			});
 
 			reply.code(200).send({ success: true, message: 'Sensor reading registered' });
 		} catch (error) {
