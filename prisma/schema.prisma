@@ -1,0 +1,14 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model SensorReading {
+  id        String   @id @default(uuid())
+  source    String   @default("ESP32")
+  createdAt DateTime @default(now())
+}
