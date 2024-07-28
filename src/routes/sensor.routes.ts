@@ -17,7 +17,7 @@ interface IReply {
 }
 
 export async function sensorRoutes(fastify: FastifyInstance) {
-	fastify.get<{ Querystring: IQueryString; Reply: IReply }>('/', async (request, reply) => {
+	fastify.post<{ Querystring: IQueryString; Reply: IReply }>('/', async (request, reply) => {
 		const { key = '', source = 'ESP32', notificationType = 'telegram' } = request.query;
 
 		if (key !== process.env.API_KEY) {
