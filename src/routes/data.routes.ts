@@ -20,10 +20,12 @@ export async function dataRoutes(fastify: FastifyInstance) {
 
 		if (key !== process.env.API_KEY) {
 			reply.code(401).send({ error: 'You should provide a valid api key' });
+			return;
 		}
 
 		if (Number(limit) < 0) {
 			reply.code(400).send({ error: 'Limit must be a positive number' });
+			return;
 		}
 
 		try {

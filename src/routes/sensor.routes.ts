@@ -22,6 +22,7 @@ export async function sensorRoutes(fastify: FastifyInstance) {
 
 		if (key !== process.env.API_KEY) {
 			reply.code(401).send({ error: 'You should provide a valid api key' });
+			return;
 		}
 
 		try {
