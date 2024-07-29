@@ -10,7 +10,7 @@ const fastify = Fastify({
 fastify.register(sensorRoutes, { prefix: '/sensor' });
 fastify.register(dataRoutes, { prefix: '/readings' });
 
-fastify.listen({ port: 3000 }, function (err, address) {
+fastify.listen({ port: Number(process.env.PORT) }, function (err, address) {
 	if (err) {
 		fastify.log.error(err);
 		process.exit(1);
