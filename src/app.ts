@@ -1,9 +1,10 @@
 import Fastify from 'fastify';
 import { sensorRoutes } from './routes/sensor.routes';
 import { dataRoutes } from './routes/data.routes';
+import 'dotenv/config';
 
 const fastify = Fastify({
-	logger: true,
+	logger: Boolean(process.env.SHOW_LOGS) ?? false,
 });
 
 fastify.register(sensorRoutes, { prefix: '/sensor' });
