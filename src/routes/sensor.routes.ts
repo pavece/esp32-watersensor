@@ -21,8 +21,7 @@ export async function sensorRoutes(fastify: FastifyInstance) {
 		const { key = '', source = 'ESP32', notificationType = 'telegram' } = request.query;
 
 		if (key !== process.env.API_KEY) {
-			reply.code(401).send({ error: 'You should provide a valid api key' });
-			return;
+			return reply.code(401).send({ error: 'You should provide a valid api key' });
 		}
 
 		try {
