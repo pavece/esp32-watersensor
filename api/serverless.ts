@@ -8,7 +8,7 @@ import Fastify, { FastifyRequest, FastifyReply } from 'fastify';
 import { sensorRoutes } from '../src/routes/sensor.routes';
 import { dataRoutes } from '../src/routes/data.routes';
 
-const app = Fastify();
+const app = Fastify({ logger: true });
 
 app.register(sensorRoutes, { prefix: '/sensor' });
 app.register(dataRoutes, { prefix: '/readings' });

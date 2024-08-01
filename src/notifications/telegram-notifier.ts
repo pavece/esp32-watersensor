@@ -5,7 +5,7 @@ interface NotifierParams {
 }
 
 export const sendTelegramNotification = async ({ token, chatId, message }: NotifierParams) => {
-	await fetch(
+	return fetch(
 		`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${message}&parse_mode=MarkdownV2 `
 	)
 		.then(r => r.json())

@@ -30,16 +30,17 @@ export async function sensorRoutes(fastify: FastifyInstance) {
 
 			// Send notifications (telegram)
 			if (notificationType === 'all' || notificationType === 'telegram') {
-				sendTelegramNotification({
+				const result = await sendTelegramNotification({
 					token: process.env.TELEGRAM_BOT_TOKEN ?? '',
 					chatId: process.env.TELEGRAM_CHAT_ID ?? '',
 					message: process.env.TELEGRAM_NOTIFICATION_MESSAGE ?? '*Sensor reading* %0ATime time to empty the can',
 				});
+				console.log(result);
 			}
 
 			// Send notifications (email)
 			if (notificationType === 'all' || notificationType === 'email') {
-				sendEmailNotification({
+				await sendEmailNotification({
 					key: process.env.RESEND_API_KEY ?? '',
 					from: process.env.EMAIL_NOTIFIER_FROM ?? '',
 					to: process.env.EMAIL_NOTIFIER_TO ?? '',
