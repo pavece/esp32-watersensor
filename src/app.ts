@@ -3,9 +3,6 @@ import { sensorRoutes } from './routes/sensor.routes';
 import { dataRoutes } from './routes/data.routes';
 import 'dotenv/config';
 
-const port = Number(process.env.PORT) || 3000;
-const host = 'RENDER' in process.env ? `0.0.0.0` : `localhost`;
-
 const fastify = Fastify({
 	logger: Boolean(process.env.SHOW_LOGS) ?? false,
 });
@@ -13,7 +10,7 @@ const fastify = Fastify({
 fastify.register(sensorRoutes, { prefix: '/sensor' });
 fastify.register(dataRoutes, { prefix: '/readings' });
 
-fastify.listen({ port, host }, function (err, address) {
+fastify.listen({ port: Number(process.env.PORT) || 3000 }, function (err, address) {
 	if (err) {
 		fastify.log.error(err);
 		process.exit(1);

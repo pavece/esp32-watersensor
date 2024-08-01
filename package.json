@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "nodemon",
     "build": "rimraf ./dist && tsc",
-    "start": "node dist/app.js"
+    "start": "node dist/app.js",
+    "vercel": "vercel dev"
   },
   "keywords": [],
   "author": "",
