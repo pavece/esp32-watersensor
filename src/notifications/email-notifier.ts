@@ -8,10 +8,10 @@ interface EmailNotifierArgs {
 	html: string;
 }
 
-export const sendEmailNotification = ({ key, from, to, subject, html }: EmailNotifierArgs) => {
+export const sendEmailNotification = async ({ key, from, to, subject, html }: EmailNotifierArgs) => {
 	try {
 		const resend = new Resend(key);
-		resend.emails.send({
+		await resend.emails.send({
 			from,
 			to,
 			subject,

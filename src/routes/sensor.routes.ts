@@ -35,12 +35,11 @@ export async function sensorRoutes(fastify: FastifyInstance) {
 					chatId: process.env.TELEGRAM_CHAT_ID ?? '',
 					message: process.env.TELEGRAM_NOTIFICATION_MESSAGE ?? '*Sensor reading* %0ATime time to empty the can',
 				});
-				console.log(result);
 			}
 
 			// Send notifications (email)
 			if (notificationType === 'all' || notificationType === 'email') {
-				await sendEmailNotification({
+				sendEmailNotification({
 					key: process.env.RESEND_API_KEY ?? '',
 					from: process.env.EMAIL_NOTIFIER_FROM ?? '',
 					to: process.env.EMAIL_NOTIFIER_TO ?? '',
