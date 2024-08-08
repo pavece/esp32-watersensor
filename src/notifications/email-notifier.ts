@@ -1,5 +1,3 @@
-import { Resend } from 'resend';
-
 interface EmailNotifierArgs {
 	key: string;
 	from: string;
@@ -10,13 +8,23 @@ interface EmailNotifierArgs {
 
 export const sendEmailNotification = async ({ key, from, to, subject, html }: EmailNotifierArgs) => {
 	try {
-		const resend = new Resend(key);
-		await resend.emails.send({
-			from,
-			to,
-			subject,
-			html,
+		const res = await fetch('https://api.resend.com/emails', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+				Authorization: `Bearer ${key}`,
+			},
+			body: JSON.stringify({
+				from,
+				to: to.split(','),
+				subject: subject,
+				html: html,
+			}),
 		});
+
+		if (!res.ok) {
+			console.log('RESEND ERROR', res);
+		}
 	} catch (error) {
 		console.log(error);
 	}
