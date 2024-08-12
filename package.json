@@ -8,7 +8,7 @@
 		"start": "node build/app.js"
 	},
 	"keywords": [],
-	"author": "",
+	"author": "Pavece",
 	"license": "ISC",
 	"description": "",
 	"devDependencies": {
